@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#064a45">
+  <title>Cathay Life Circle | Mobile concept</title>
+  <style>
+    :root { color-scheme:light; --green:#00675e; --dark:#064a45; --mint:#e7f2eb; --ink:#213b35; --muted:#63776e; --line:#dfe7df; font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:#dce5df; }
+    button,input,select { font:inherit; }
+    button { cursor:pointer; touch-action:manipulation; }
+    button:disabled { opacity:.5; cursor:not-allowed; }
+    :focus-visible { outline:3px solid #bd9448; outline-offset:3px; }
+    [hidden] { display:none !important; }
+    .phone { width:min(100%,430px); min-height:100dvh; margin:auto; background:#f6f7f2; box-shadow:0 0 50px #173c3615; }
+    header { display:flex; align-items:center; justify-content:space-between; height:68px; padding:0 22px; background:white; border-bottom:1px solid var(--line); }
+    .brand { display:flex; align-items:center; gap:9px; font-size:12px; letter-spacing:.06em; }
+    .logo { display:grid; place-items:center; width:30px; height:30px; border:1px solid #91b8a5; border-radius:50%; font:21px Georgia,serif; color:var(--green); }
+    .tag { display:inline-block; padding:5px 8px; border-radius:20px; color:var(--green); background:var(--mint); font-size:10px; font-weight:650; }
+    main { padding:25px 20px calc(100px + env(safe-area-inset-bottom)); }
+    h1 { margin:0 0 10px; font-size:30px; line-height:1.13; letter-spacing:-.04em; }
+    h2 { margin:0 0 8px; font-size:17px; letter-spacing:-.025em; }
+    h3 { margin:0; font-size:13px; }
+    p { margin:8px 0; line-height:1.6; }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:10px; font-weight:750; letter-spacing:.13em; text-transform:uppercase; }
+    .subtle { color:var(--muted); font-size:12px; line-height:1.6; }
+    .card { padding:19px; margin:17px 0; border:1px solid var(--line); border-radius:17px; background:white; }
+    .member { color:white; border:0; background:radial-gradient(circle at 100% 0,#29958144 0 30%,transparent 31%),linear-gradient(120deg,#064a45,#0a7e6a); }
+    .member .tag { color:white; background:#ffffff20; }
+    .member .subtle { color:#cde2d6; }
+    .name { margin:23px 0 3px; font:27px Georgia,serif; }
+    .row { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+    .balance { font-size:31px; letter-spacing:-.04em; font-weight:600; }
+    .member .row:last-child { margin-top:23px; }
+    .button { display:block; width:100%; min-height:48px; margin-top:13px; padding:11px 12px; border:1px solid var(--green); border-radius:11px; color:white; background:var(--green); font-size:13px; font-weight:650; }
+    .secondary { color:var(--green); background:white; border-color:#c3d6c9; }
+    .notice { margin:14px 0; padding:13px; border-radius:11px; color:#3e6452; background:var(--mint); font-size:12px; line-height:1.6; }
+    .gold { background:#f8efd9; color:#705629; }
+    .item { display:flex; align-items:center; gap:12px; padding:13px 0; border-bottom:1px solid var(--line); }
+    .item:last-child { border-bottom:0; }
+    .icon { display:grid; place-items:center; flex:0 0 36px; width:36px; height:36px; border-radius:11px; color:var(--green); background:var(--mint); font-size:17px; }
+    label { display:block; margin:15px 0 7px; font-size:12px; font-weight:650; }
+    select,input[type=text] { width:100%; min-height:47px; padding:11px; border:1px solid #c5d5c9; border-radius:9px; color:var(--ink); background:white; }
+    .check { display:flex; gap:10px; align-items:flex-start; font-size:12px; line-height:1.6; font-weight:400; }
+    input[type=checkbox] { width:20px; height:20px; flex-shrink:0; accent-color:var(--green); margin:0; }
+    .note { margin:17px 0 0; font-size:10px; line-height:1.6; color:var(--muted); }
+    .qr { display:grid; grid-template-columns:repeat(9,1fr); gap:3px; width:154px; height:154px; padding:10px; margin:22px auto 10px; border:1px solid var(--line); background:white; }
+    .qr i { background:var(--dark); }
+    .qr i:nth-child(3n),.qr i:nth-child(7n) { background:white; }
+    .center { text-align:center; }
+    .error { color:#963b28; font-size:12px; line-height:1.5; }
+    .voucher { padding:16px; border:1px dashed #c3a45d; border-radius:11px; background:#fcf7e8; }
+    .voucher strong { display:block; margin:6px 0; font:23px Georgia,serif; }
+    .upload-box { padding:18px 12px; margin-top:15px; border:1px dashed #9ab9a4; border-radius:12px; background:#f7faf6; text-align:center; }
+    .upload-box input { width:100%; min-width:0; margin-top:12px; font-size:11px; }
+    .upload-box input::file-selector-button { padding:10px; margin-right:6px; border:1px solid #c3d6c9; border-radius:8px; color:var(--green); background:white; }
+    .document { padding:16px; margin-top:14px; border:1px solid var(--line); border-radius:12px; background:#f6f7f2; overflow-wrap:anywhere; }
+    .steps { display:flex; gap:5px; margin:16px 0; padding:0; list-style:none; }
+    .steps li { flex:1; padding:8px 3px; border-top:3px solid #dfe7df; color:var(--muted); font-size:10px; }
+    .steps li.current { border-color:var(--green); color:var(--green); font-weight:700; }
+    nav { position:fixed; z-index:4; left:50%; bottom:0; transform:translateX(-50%); display:grid; grid-template-columns:repeat(4,1fr); width:min(100%,430px); padding:7px 5px calc(7px + env(safe-area-inset-bottom)); border-top:1px solid var(--line); background:white; }
+    nav button { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; min-height:50px; border:0; border-radius:10px; color:var(--muted); background:white; font-size:10px; }
+    nav button[aria-current=page] { color:var(--green); background:var(--mint); }
+    nav span { font-size:20px; }
+    .toast { position:fixed; z-index:6; bottom:85px; left:50%; transform:translateX(-50%); width:min(390px,calc(100% - 32px)); padding:15px; border-radius:11px; color:white; background:var(--dark); font-size:12px; box-shadow:0 8px 25px #0002; }
+    details { margin:17px 0; }
+    summary { min-height:38px; color:var(--green); font-size:12px; cursor:pointer; }
+    @media(min-width:600px) { body { padding-top:20px; } .phone { border-radius:25px 25px 0 0; overflow:hidden; } }
+    @media(max-width:350px) { main { padding-left:15px; padding-right:15px; } header { padding:0 15px; } }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <header><div class="brand"><span class="logo" aria-hidden="true">C</span><strong>CATHAY LIFE CIRCLE</strong></div><span class="tag">PT · Member</span></header>
+    <main>
+      <section data-page="home" aria-labelledby="home-title">
+        <p class="eyebrow">Good morning, Percy</p><h1 id="home-title">A little closer.<br>At every life stage.</h1>
+        <div class="card member"><div class="row"><strong style="font-size:11px;letter-spacing:.08em">YOUR MEMBERSHIP</strong><span class="tag" id="stage">Member</span></div><p class="name">Percy Trin</p><p class="subtle">MEMBER SINCE 2024 · •••• 4821</p><div class="row"><div><div class="balance" id="balance">12,480</div><div class="subtle">Asia Miles</div></div><div class="subtle">220<br>Status Points</div></div></div>
+        <div class="card"><h2>Your membership grows with you</h2><ol class="steps" aria-label="Life stages"><li>Childhood</li><li id="life-university">University</li><li id="life-graduation">Graduation</li><li>Family</li></ol><p class="subtle">One membership, with your history and progress in one place. Family Circle stays with you at every stage.</p></div>
+        <div class="card"><div class="row"><h2>Student Pass</h2><span class="tag" id="student-badge">Not verified</span></div><p class="subtle" id="student-copy">Choose your university and upload your student ID to verify your eligibility.</p>
+          <ol class="steps" aria-label="Student verification progress"><li id="step-upload" class="current">1 · Upload ID</li><li id="step-review">2 · Review</li><li id="step-result">3 · SheerID result</li></ol>
+          <div id="student-form">
+            <label for="education">Education level</label><select id="education"><option value="university">University student</option><option value="secondary">Secondary school student</option><option value="other">Not currently a university student</option></select>
+            <label for="university">Choose your university</label><select id="university" aria-controls="upload-panel"><option value="">Select a university</option><optgroup label="Hong Kong"><option>The University of Hong Kong</option><option>The Chinese University of Hong Kong</option><option>The Hong Kong University of Science and Technology</option><option>City University of Hong Kong</option><option>The Hong Kong Polytechnic University</option><option>Hong Kong Baptist University</option><option>Lingnan University</option><option>The Education University of Hong Kong</option><option>Hong Kong Metropolitan University</option><option>The Hang Seng University of Hong Kong</option></optgroup></select>
+            <div id="upload-panel" hidden>
+            <div class="upload-box"><span class="icon" style="margin:auto" aria-hidden="true">↑</span><h3 style="margin-top:10px">Upload your student ID</h3><p class="subtle" id="upload-university"></p><p class="subtle">Make sure your name, university and expiry date are clearly visible.</p><label for="student-file">JPG, PNG or PDF · up to 10 MB</label><input id="student-file" type="file" accept=".jpg,.jpeg,.png,.pdf"><button class="button secondary" id="sample-id">Use saved student ID</button></div>
+            <div class="document" id="document-review" hidden><span class="tag">Ready for review</span><p id="file-name" class="subtle"></p><h3>Membership details</h3><p class="subtle" id="sample-profile"></p></div>
+            <label class="check"><input type="checkbox" id="verify-consent"><span>I confirm my details are correct and agree to the student verification terms.</span></label>
+            <button class="button" id="verify">Submit for SheerID verification</button>
+            </div><p class="error" id="student-error" role="alert" hidden></p>
+          </div>
+          <div class="notice" id="student-processing" role="status" hidden><strong>SheerID verification</strong><br>Checking university eligibility and enrolment validity. Please wait…</div>
+          <div class="document" id="verification-result" role="status" hidden><span class="tag">Student verified</span><h3 style="margin-top:12px">Percy's Student Pass</h3><p class="subtle" id="verification-details"></p><button class="button secondary" id="renew" hidden>Still at university? Verify again</button><p class="note">Keep your benefits by re-verifying each September–October.</p></div>
+        </div>
+        <div class="card" id="student-benefits" hidden><div class="row"><h2>Your Student Benefits</h2><span class="tag">Student exclusive</span></div><div class="item"><span class="icon" aria-hidden="true">%</span><div><h3>10% off eligible student fares</h3><span class="subtle">Qualifying routes and fares only</span></div></div><div class="item"><span class="icon" aria-hidden="true">+</span><div><h3>Extra baggage</h3><span class="subtle">Allowance depends on the eligible route and fare</span></div></div><div class="item"><span class="icon" aria-hidden="true">5%</span><div><h3>5% extra Asia Miles</h3><span class="subtle">On eligible earn with your linked Student Pass</span></div></div><p class="subtle">Continue enjoying eligible student offers. Earn Asia Miles and Status Points from day one under the applicable earning rules; these remain separate balances.</p><div class="notice"><strong>Applied automatically</strong><br>Book with your linked membership. No student promo code needed.</div><p class="subtle" id="benefits-validity"></p></div>
+        <div class="card" id="graduation-confirm" hidden><p class="eyebrow">Ready for your next chapter?</p><h2>I'm graduating</h2><p class="subtle">Confirm your graduation to start six months of celebration offers today. Student benefits end; your account, Asia Miles and 220 Status Points remain visible in the same profile.</p><label class="check"><input id="graduation-consent" type="checkbox"><span>I confirm I am graduating and want to start my six-month offer now.</span></label><p class="error" id="graduation-error" role="alert" hidden>Please confirm your graduation first.</p><button class="button" id="confirm-graduation">I'm graduating · start my offers</button></div>
+        <div class="card" id="graduation" hidden><p class="eyebrow">Your next chapter</p><h2>A graduation gift, for six months.</h2><p class="subtle" id="graduation-dates"></p><div class="notice gold"><strong>5% extra Asia Miles</strong><br>On eligible earn during your graduation window. Not Status Points or cash back.</div><div class="voucher"><span class="eyebrow">Your graduation reward</span><strong>One-day lounge pass</strong><span class="subtle">One pass to use within the six-month window. Not daily access.</span><button class="button secondary" id="lounge">Use lounge pass</button><p class="subtle" id="lounge-status" role="status"></p></div></div>
+        <div class="card"><h2>Your family, connected.</h2><p class="subtle" id="home-family">Join the Trin family circle and work toward shared rewards.</p><button class="button secondary" data-tab="family">Open Family</button></div>
+      </section>
+      <section data-page="family" hidden aria-labelledby="family-title">
+        <p class="eyebrow">Family Circle</p><h1 id="family-title">Your people.<br>One circle.</h1><p class="subtle">Up to 6 members, including the admin. Children join through a parent; adults confirm their own invitation.</p>
+        <div class="card"><span class="tag">Family Travel Benefits</span><h2 style="margin-top:12px">Fly together. Enjoy more.</h2><div class="item"><span class="icon" aria-hidden="true">+</span><div><h3>Extra Asia Miles · up to 8%</h3><span class="subtle">Bonus miles depend on the number of circle members travelling together, capped at 8%. At least 3 members must share the same flight and booking.</span></div></div><div class="item"><span class="icon" aria-hidden="true">3</span><div><h3>3 journeys. One lounge reward.</h3><span class="subtle">Complete 3 qualifying journeys together to unlock a free one-day lounge pass.</span></div></div><ol class="steps" aria-label="Family journey milestones"><li id="trip-1">Journey 1</li><li id="trip-2">Journey 2</li><li id="trip-3">Journey 3</li></ol><p class="subtle" id="trip-progress" role="status"></p><div class="voucher"><strong>Family one-day lounge pass</strong><p class="subtle" id="family-pass-status"></p><button class="button secondary" id="family-lounge" disabled>Locked · complete 3 journeys</button></div><p class="note">Rewards follow completed travel, not booking alone. Asia Miles and Status Points remain separate.</p></div>
+        <label for="device">Viewing as</label><select id="device"><option value="child">Percy · family member</option><option value="admin">Mum · family admin</option></select>
+        <div id="child-view" class="card"><span class="tag">Percy's membership · •••• 4821</span><h2 style="margin-top:16px">My family joining code</h2><div class="qr" id="qr" aria-hidden="true"></div><p class="center subtle">Your personal family joining code</p><p class="subtle">Show your QR to Mum or Dad. They scan it from their own Family page.</p><button class="button" id="show-admin">Switch to Mum's view</button></div>
+        <div id="admin-view" hidden><div class="card"><span class="tag">Mum · admin</span><div class="row" style="margin-top:14px"><h2>The Trin family</h2><span class="tag" id="member-count">1 / 6 members</span></div><div class="item"><span class="icon" aria-hidden="true">MC</span><div><h3>Mei Trin</h3><span class="subtle">Mum · admin</span></div></div><div id="family-members"></div><div class="notice gold" id="circle-full" hidden>Circle full · maximum 6 members including Mum. No further members can join.</div>
+          <label for="joining-member">Who would you like to add?</label><select id="joining-member"><option value="chloe">Percy · my child</option><option value="sam">Sam · my child</option><option value="dad">Daniel · my partner / spouse</option><option value="grandma">Grandma · adult family member</option><option value="grandpa">Grandpa · adult family member</option><option value="aunt">Aunt · adult family member</option><option value="uncle">Uncle · adult family member</option></select><button class="button" id="scan">Scan family member's QR</button>
+          <div id="join-confirm" hidden><div class="notice" id="joining-details"></div><div class="notice gold" id="minor-alert" role="alert" hidden><strong>Minor account detected</strong><br>Asia Miles transfers are one-way: from this member to their guardian, Mei Trin, the family admin. The guardian manages transfers on their behalf.</div><label class="check"><input type="checkbox" id="join-consent"><span>I confirm the family relationship and accept the one-year commitment and any minor transfer restrictions shown above. Members cannot leave or switch circles during the lock.</span></label><p id="join-error" class="error" role="alert" hidden></p><button class="button" id="join">This is my kid · add to family</button></div>
+          <div class="notice" id="adult-invite" hidden><p id="adult-invite-copy"></p><button class="button" id="adult-accept">Adult: accept invitation &amp; one-year lock</button></div>
+        </div></div>
+        <div class="card" id="guardian-miles" hidden><span class="tag">Mum · guardian account</span><h2 style="margin-top:12px">Child miles, in your view</h2><p class="subtle" id="child-miles"></p><button class="button secondary" id="guardian-transfer">Transfer Sam's miles to guardian</button><div class="notice" id="guardian-history" role="status" hidden></div></div>
+        <div class="notice gold" id="lock-info"><strong>A one-year commitment</strong><br>The lock starts when a member joins. Leaving or switching circles is unavailable during the lock.</div>
+        <button class="button secondary" id="leave" hidden>Leave family circle</button><p class="subtle" id="leave-copy"></p>
+        <p class="note">Only share your joining code with the family admin. Need help with a mistaken link? Visit account support in Settings.</p>
+      </section>
+      <section data-page="redeem" hidden aria-labelledby="redeem-title">
+        <p class="eyebrow">Shared rewards</p><h1 id="redeem-title">More miles.<br>More together.</h1>
+        <div class="card member"><span class="tag">Trin family · shared pool</span><p class="name">Our next shared reward</p><div class="row"><div><div class="balance" id="pool">62,000</div><span class="subtle">Asia Miles</span></div><span class="subtle">Not Status Points</span></div></div>
+        <div class="notice" id="redeem-gate">Join the family circle before contributing or redeeming.</div>
+        <div class="card"><h2>Contribute to the family</h2><p class="subtle" id="contribution-copy"></p><button class="button secondary" id="contribute">Contribute 2,000 miles</button></div>
+        <div class="card"><h2>Family travel kit</h2><p class="subtle">10,000 Asia Miles</p><p class="subtle">Mum, as admin, confirms redemption with a one-time code. Every member receives an alert.</p><button class="button" id="request">Mum: request redemption code</button><div id="code-form" hidden><div class="notice" id="sample-code"></div><label for="otp">One-time code</label><input id="otp" type="text" inputmode="numeric" maxlength="6" autocomplete="off"><p class="error" id="otp-error" role="alert" hidden></p><button class="button" id="redeem">Confirm · redeem 10,000 miles</button></div><div id="award" class="notice" role="status" hidden><strong>Reward redeemed</strong><br>10,000 miles deducted. All family members notified.</div></div>
+        <p class="note">Review your reward before confirming. Keep your one-time code private.</p>
+      </section>
+      <section data-page="settings" hidden aria-labelledby="settings-title">
+        <p class="eyebrow">Settings</p><h1 id="settings-title">Keep it simple.</h1>
+        <div class="card"><h2>Percy Trin</h2><p class="subtle">Membership · •••• 4821</p><label class="check"><input type="checkbox" id="notifications" checked><span>Optional offers and lifestyle updates</span></label><p class="subtle">Security and family redemption alerts remain enabled.</p></div>
+        <details><summary>Presentation controls</summary>
+        <div class="card"><h2>Preview your next chapter</h2><p class="subtle">Start on 14 Nov 2026, then preview renewal or confirm graduation on Home.</p><label for="demo-date">Preview date</label><select id="demo-date"><option value="2026-11-14">14 Nov 2026 · initial verification</option><option value="2027-08-31">31 Aug 2027 · before renewal window</option><option value="2027-09-01">1 Sep 2027 · renewal opens</option><option value="2027-10-31">31 Oct 2027 · renewal deadline</option><option value="2027-11-01">1 Nov 2027 · unrenewed pass expires</option><option value="2027-11-14">14 Nov 2027 · family lock anniversary</option><option value="2028-04-30">30 Apr 2028 · graduation last day if confirmed 1 Nov</option><option value="2028-05-01">1 May 2028 · graduation ends if confirmed 1 Nov</option></select><p class="subtle" id="today-label"></p><h3>Completed family journeys</h3><p class="subtle">Join Percy and Daniel first. These presentation fixtures each represent one completed flight on a distinct booking with Mum, Percy and Daniel; no live bookings are checked.</p><button class="button secondary" data-trip="HKGTYO">Record Hong Kong–Tokyo journey</button><button class="button secondary" data-trip="HKG TPE">Record Hong Kong–Taipei journey</button><button class="button secondary" data-trip="HKG ICN">Record Hong Kong–Seoul journey</button><button class="button secondary" id="reset">Restart walkthrough</button></div></details>
+        <details><summary>About the proposed rules</summary><p class="subtle">University students aged 18–24 upload evidence for a proposed SheerID check every year. Re-verification runs 1 September–31 October of the following calendar year, including for November sign-ups. Provider coverage, ISIC acceptance and returned fields require confirmation; this prototype uses university IDs only.</p><p class="subtle">Benefits remain active through the October deadline. Successful renewal advances the window to next year. Expiry pauses student benefits but does not prove graduation or start a reward. Confirming graduation starts six calendar months of offers immediately.</p><p class="subtle">The 10% student discount, student and graduation 5% extra Asia Miles, one-year family lock and lounge passes are proposed terms, not existing Cathay entitlements. Progress remains displayed, not a guaranteed extension of Status Point validity. Age 18–24 follows the Student Pass slide; the separate 18–25 caption needs alignment.</p><p class="subtle">Family bonuses are capped at 8%; no passenger-to-rate formula or stacking rule is assumed and no bonus miles are credited here. Three qualifying completed journeys unlock one family pass, separate from the graduation pass. Pass coverage, expiry, reset periods and lounge admission require approval. Guardian transfers debit the child and credit the guardian only, not the shared pool.</p></details>
+        <button class="button secondary" id="support">Family safety &amp; account support</button><div class="notice" id="support-copy" hidden>Prototype only: no support request was sent. A live service needs a reviewed route for mistaken joins, safeguarding and exceptional lock overrides.</div>
+        <details><summary>About this competition prototype</summary><p class="subtle">Independent concept, not an official Cathay app. All verification, family links, QR scans, codes, transfers, alerts and lounge passes are simulated. No live SheerID integration or actual entitlements. University coverage and proposed offers require confirmation.</p><p class="subtle">The saved student ID and membership details are fictional. File selection shows a filename only; contents are not read, extracted, stored or sent. Use fictional documents, not real personal IDs. State resets on reload.</p><p class="subtle">Minor detection uses fictional membership birth dates and an under-18 threshold: choose Sam to see the automatic alert; Percy and Daniel follow adult acceptance. Production must use verified birth dates and approved age rules.</p><p class="subtle">Production needs secure QR and code validation, identity and relationship checks, guardian consent and reviewed safety exceptions. The university list does not imply SheerID coverage.</p></details>
+      </section>
+    </main>
+    <nav aria-label="Main navigation"><button data-tab="home" aria-current="page"><span aria-hidden="true">⌂</span>Home</button><button data-tab="family"><span aria-hidden="true">♧</span>Family</button><button data-tab="redeem"><span aria-hidden="true">✧</span>Redeem</button><button data-tab="settings"><span aria-hidden="true">⚙</span>Settings</button></nav>
+  </div>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script>
+    const $ = id => document.getElementById(id);
+    let expiry, renewalDate, graduationStart, graduationEnd, graduationLast, verifiedUniversity;
+    let today, verified, joinedAt, lockUntil, balance, pool, loungeUsed, redeemed, code, codeExpires, timer;
+    let documentName="", verifying=false, verificationTimer;
+    const candidates = {
+      chloe:{name:"Percy Trin",role:"Adult child · student eligibility separate",dob:"2005-04-12"},
+      sam:{name:"Sam Trin",role:"Child",dob:"2012-08-20"},
+      dad:{name:"Daniel Trin",role:"Partner / spouse · adult member",dob:"1978-03-16"},
+      grandma:{name:"Grandma Trin",role:"Adult family member",dob:"1952-06-01"},
+      grandpa:{name:"Grandpa Trin",role:"Adult family member",dob:"1950-09-10"},
+      aunt:{name:"Aunt Trin",role:"Adult family member",dob:"1982-02-14"},
+      uncle:{name:"Uncle Trin",role:"Adult family member",dob:"1980-12-05"}
+    };
+    const maxMembers=6;
+    let familyMembers=[], pendingAdult="";
+    let graduationConfirmed=false, completedTrips=new Set(), familyPassUsed=false, childMiles=2400, guardianMiles=18000;
+    function circleSize() { return 1+familyMembers.length; }
+    const format = number => number.toLocaleString("en-US");
+    const date = value => new Date(`${value}T00:00:00Z`);
+    const iso = value => value.toISOString().slice(0,10);
+    const pretty = value => date(value).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"});
+    function addMonths(value, count) {
+      const source = date(value), day = source.getUTCDate();
+      source.setUTCDate(1);
+      source.setUTCMonth(source.getUTCMonth() + count);
+      const end = new Date(Date.UTC(source.getUTCFullYear(),source.getUTCMonth()+1,0)).getUTCDate();
+      source.setUTCDate(Math.min(day,end));
+      return iso(source);
+    }
+    function isMinor(id) {
+      return today<addMonths(candidates[id].dob,18*12);
+    }
+    function setEligibility(start) {
+      const year=date(start).getUTCFullYear()+1;
+      renewalDate=`${year}-09-01`;
+      expiry=`${year}-10-31`;
+    }
+    function toast(message) { $("toast").textContent=message; $("toast").hidden=false; clearTimeout(timer); timer=setTimeout(()=>$("toast").hidden=true,4000); }
+    function tab(name) {
+      document.querySelectorAll("[data-page]").forEach(page=>page.hidden=page.dataset.page!==name);
+      document.querySelectorAll("nav button").forEach(button=>{
+        if(button.dataset.tab===name) button.setAttribute("aria-current","page");
+        else button.removeAttribute("aria-current");
+      });
+      window.scrollTo(0,0);
+    }
+    function render() {
+      const studentActive = verified && !graduationConfirmed && today<=expiry;
+      const graduateActive = graduationConfirmed && today>=graduationStart && today<graduationEnd;
+      $("balance").textContent=format(balance); $("pool").textContent=format(pool);
+      $("stage").textContent=studentActive?"University student":graduateActive?"Graduate":"Member";
+      $("student-badge").textContent=graduationConfirmed?"Graduated":studentActive?"Verified":verified?"Expired":verifying?"Reviewing":"Not verified";
+      $("student-form").hidden=verified || verifying || graduationConfirmed;
+      $("student-processing").hidden=!verifying;
+      $("verification-result").hidden=!verified;
+      $("renew").hidden=!verified || graduationConfirmed || today<renewalDate;
+      $("verification-details").textContent=verified?`${verifiedUniversity}. Valid through ${pretty(expiry)}. Annual re-verification window: ${pretty(renewalDate)}–${pretty(expiry)}. Membership •••• 4821.`:"";
+      $("step-upload").classList.toggle("current",!documentName && !verified);
+      $("step-review").classList.toggle("current",!!documentName && !verified && !verifying);
+      $("step-result").classList.toggle("current",verified || verifying);
+      $("student-benefits").hidden=!studentActive;
+      $("benefits-validity").textContent=`Active through ${pretty(expiry)}. Re-verify between ${pretty(renewalDate)} and ${pretty(expiry)} to keep your student benefits.`;
+      $("student-copy").textContent=verified?`Re-verify ${pretty(renewalDate)}–${pretty(expiry)}. ${studentActive?"Your benefits remain active through the deadline.":"Student discounts and baggage are paused until you re-verify."}`:"University students only. Choose your university and upload your ID. Annual re-verification takes place each September–October.";
+      $("graduation-confirm").hidden=!verified || graduationConfirmed;
+      $("life-university").classList.toggle("current",studentActive);
+      $("life-graduation").classList.toggle("current",graduationConfirmed);
+      $("graduation").hidden=!graduationConfirmed;
+      $("graduation-dates").textContent=graduationConfirmed?`${pretty(graduationStart)} to ${pretty(graduationLast)}. ${graduateActive?"Your six-month offer is active.":"Your six-month graduation offer has ended."}`:"";
+      $("lounge").disabled=!graduateActive || loungeUsed;
+      $("lounge-status").textContent=loungeUsed?"Pass used. We hope you enjoyed your visit.":graduateActive?"One use available during this window.":"Pass expired; extra-miles offer also ended.";
+      $("home-family").textContent=joinedAt?`You're in the Trin family. ${today<lockUntil?`Locked until ${pretty(lockUntil)}.`:"One-year commitment completed."}`:"Join the Trin family circle and work toward shared rewards.";
+      const selected=$("joining-member").value;
+      const alreadyJoined=familyMembers.some(member=>member.id===selected);
+      const full=circleSize()>=maxMembers;
+      $("member-count").textContent=`${circleSize()} / ${maxMembers} members`;
+      $("circle-full").hidden=!full;
+      $("family-members").replaceChildren(...familyMembers.map(member=>{
+        const item=document.createElement("div"); item.className="item";
+        const text=document.createElement("div"), name=document.createElement("h3"), detail=document.createElement("span");
+        name.textContent=candidates[member.id].name; detail.className="subtle";
+        detail.textContent=`${member.minor?"Minor · one-way miles transfers to guardian/admin only":candidates[member.id].role} · locked until ${pretty(member.until)}`;
+        text.append(name,detail); item.append(text); return item;
+      }));
+      $("scan").disabled=full || alreadyJoined;
+      $("scan").textContent=full?"Circle full":alreadyJoined?"Member already in circle":"Scan family member's QR";
+      $("join-confirm").hidden=full || alreadyJoined || !$("scan").dataset.scanned;
+      const selectedMinor=isMinor(selected);
+      $("minor-alert").hidden=$("join-confirm").hidden || !selectedMinor;
+      $("joining-details").textContent=`${candidates[selected].name} · QR recognised. ${selectedMinor?"Minor (under 18)":"Adult (18 or over)"} · based on membership date of birth. ${selectedMinor?"Confirm your relationship to continue.":"They will review and accept the invitation on their own device."}`;
+      $("join").textContent=selectedMinor?"This is my kid · add to family":selected==="dad"?"My partner / spouse · send invite":selected==="chloe"?"My adult child · send invite":"My adult family member · send invite";
+      $("adult-invite").hidden=!pendingAdult;
+      $("adult-invite-copy").textContent=pendingAdult?`${candidates[pendingAdult].name}'s device: review Mum's invitation and the one-year lock. Adults join as members, not co-admins.`:"";
+      $("adult-accept").disabled=full;
+      $("lock-info").textContent=joinedAt?`Joined ${pretty(joinedAt)}. One-year lock ends ${pretty(lockUntil)}. ${today<lockUntil?"Leaving and switching circles are unavailable.":"You may now leave the circle."}`:"A one-year commitment: the lock starts when a member joins. Leaving or switching circles is unavailable during the lock.";
+      $("leave").hidden=!joinedAt; $("leave").disabled=!!joinedAt && today<lockUntil;
+      $("leave-copy").textContent=joinedAt && today<lockUntil?"Your one-year commitment is active. For exceptional circumstances, contact account support in Settings.":"";
+      $("redeem-gate").hidden=!!joinedAt;
+      const minorMember=familyMembers.some(member=>member.id==="chloe" && member.minor);
+      $("contribution-copy").textContent=minorMember?"Minor account: miles can transfer only to Mei Trin, your guardian/admin, not directly into the shared pool. Ask your guardian to manage the transfer.":`Percy has ${format(balance)} Asia Miles available.`;
+      $("contribute").disabled=!joinedAt || minorMember || balance<2000 || pool>98000;
+      $("request").disabled=!joinedAt || redeemed || pool<10000;
+      $("award").hidden=!redeemed;
+      $("today-label").textContent=`Preview date: ${pretty(today)}. No real time or account changes.`;
+      $("trip-progress").textContent=`${completedTrips.size} / 3 qualifying journeys completed`;
+      for(let i=1;i<=3;i++) $("trip-"+i).classList.toggle("current",completedTrips.size>=i);
+      $("family-lounge").disabled=completedTrips.size<3 || familyPassUsed;
+      $("family-lounge").textContent=familyPassUsed?"Pass used":completedTrips.size>=3?"Use family lounge pass":"Locked · complete 3 journeys";
+      $("family-pass-status").textContent=familyPassUsed?"Your family reward has been used.":completedTrips.size>=3?"Unlocked · one free one-day lounge pass":`${3-completedTrips.size} more qualifying journeys to unlock your pass.`;
+      document.querySelectorAll("[data-trip]").forEach(button=>button.disabled=completedTrips.has(button.dataset.trip));
+      const samJoined=familyMembers.some(member=>member.id==="sam");
+      $("guardian-miles").hidden=$("device").value!=="admin" || !samJoined;
+      $("child-miles").textContent=`Sam: ${format(childMiles)} Asia Miles. Guardian Mei: ${format(guardianMiles)} Asia Miles. Transfers flow one way, from Sam to Mei.`;
+      $("guardian-transfer").disabled=!samJoined || childMiles===0;
+    }
+    function reset() {
+      clearTimeout(verificationTimer); documentName=""; verifying=false;
+      $("student-file").value=""; $("document-review").hidden=true; $("file-name").textContent="";
+      today="2026-11-14"; verified=false; joinedAt=null; lockUntil=null; balance=12480; pool=62000; loungeUsed=false; redeemed=false; code=""; codeExpires=0;
+      familyMembers=[]; pendingAdult=""; $("joining-member").value="chloe";
+      graduationConfirmed=false; graduationStart=""; graduationEnd=""; graduationLast="";
+      completedTrips=new Set(); familyPassUsed=false; childMiles=2400; guardianMiles=18000;
+      $("guardian-history").hidden=true; $("guardian-history").textContent="";
+      $("graduation-consent").checked=false; $("graduation-error").hidden=true;
+      setEligibility(today); verifiedUniversity="";
+      $("university").value=""; $("university").disabled=false; $("upload-panel").hidden=true;
+      $("demo-date").value=today; $("device").value="child"; $("child-view").hidden=false; $("admin-view").hidden=true;
+      $("education").value="university"; $("verify-consent").checked=false; $("join-consent").checked=false; $("notifications").checked=true;
+      delete $("scan").dataset.scanned;
+      ["student-error","join-error","code-form","otp-error","toast","support-copy"].forEach(id=>$(id).hidden=true);
+      $("otp").value=""; $("sample-code").textContent=""; clearTimeout(timer);
+      render(); tab("home");
+    }
+    document.addEventListener("click",event=>{const target=event.target.closest("[data-tab]"); if(target) tab(target.dataset.tab);});
+    function clearDocument() {
+      documentName=""; $("student-file").value=""; $("document-review").hidden=true;
+      $("verify-consent").checked=false; $("student-error").hidden=true;
+    }
+    function updateUniversity() {
+      clearDocument();
+      const eligible=$("education").value==="university" && !!$("university").value;
+      $("upload-panel").hidden=!eligible;
+      $("upload-university").textContent=$("university").value;
+      render();
+    }
+    $("university").addEventListener("change",updateUniversity);
+    $("education").addEventListener("change",()=>{
+      $("university").disabled=$("education").value!=="university";
+      if($("university").disabled) $("university").value="";
+      updateUniversity();
+      if($("university").disabled) {$("student-error").textContent="Only university students qualify for Student Pass."; $("student-error").hidden=false;}
+    });
+    $("renew").addEventListener("click",()=>{
+      verified=false; clearDocument(); $("upload-panel").hidden=!$("university").value; render();
+      toast("Choose your university and upload a current student ID for the annual check.");
+    });
+    function selectDocument(name) {
+      if(!$("university").value || $("education").value!=="university") {
+        $("student-error").textContent="Choose your university before uploading."; $("student-error").hidden=false; return;
+      }
+      documentName=name;
+      $("file-name").textContent=name;
+      $("document-review").hidden=false;
+      $("student-error").hidden=true;
+      $("verify-consent").checked=false;
+      $("sample-profile").textContent=`Percy Trin · ${$("university").value}. Membership: •••• 4821. Next re-verification: September–October ${date(today).getUTCFullYear()+1}.`;
+      render();
+    }
+    $("sample-id").addEventListener("click",()=>{
+      $("student-file").value="";
+      selectDocument("Percy_Trin_student_ID.png");
+    });
+    $("student-file").addEventListener("change",()=>{
+      const file=$("student-file").files[0];
+      documentName=""; $("document-review").hidden=true; $("verify-consent").checked=false;
+      if(!file) {render(); return;}
+      const error=!/\.(jpe?g|png|pdf)$/i.test(file.name)?"Choose a JPG, PNG or PDF document.":file.size>10*1024*1024?"This file is too large. Choose a document up to 10 MB.":file.size===0?"This file is empty. Choose another document.":"";
+      if(error) { $("student-error").textContent=error; $("student-error").hidden=false; $("student-file").value=""; render(); return; }
+      selectDocument(file.name);
+    });
+    $("verify").addEventListener("click",()=>{
+      if(verifying || verified) return;
+      const ageEligible=today>=addMonths(candidates.chloe.dob,18*12) && today<addMonths(candidates.chloe.dob,25*12);
+      const error=$("education").value!=="university"?"Only university students qualify for Student Pass.":!ageEligible?"Student Pass is available to university students aged 18–24.":!$("university").value?"Choose your university first.":!documentName?"Upload your student ID or choose your saved ID first.":!$("verify-consent").checked?"Confirm your details and accept the verification terms first.":"";
+      $("student-error").textContent=error; $("student-error").hidden=!error;
+      if(error) return;
+      const submittedDate=today, submittedUniversity=$("university").value;
+      verifying=true; render();
+      verificationTimer=setTimeout(()=>{
+        setEligibility(submittedDate); verifiedUniversity=submittedUniversity;
+        verifying=false; verified=true; render();
+        toast(`Student benefits unlocked. Re-verify ${pretty(renewalDate)}–${pretty(expiry)}.`);
+      },2200);
+    });
+    $("device").addEventListener("change",()=>{const child=$("device").value==="child"; $("child-view").hidden=!child; $("admin-view").hidden=child; render();});
+    $("show-admin").addEventListener("click",()=>{$("device").value="admin"; $("device").dispatchEvent(new Event("change"));});
+    $("scan").addEventListener("click",()=>{$("scan").dataset.scanned="true"; render();});
+    $("joining-member").addEventListener("change",()=>{
+      delete $("scan").dataset.scanned; $("join-consent").checked=false; $("join-error").hidden=true; render();
+    });
+    function addFamilyMember(id) {
+      if(circleSize()>=maxMembers) {toast("Circle full. Maximum 6 members including the admin."); return;}
+      if(familyMembers.some(member=>member.id===id)) {toast("This member already belongs to the circle."); return;}
+      familyMembers.push({id,minor:isMinor(id),until:addMonths(today,12)});
+      if(id==="chloe") {joinedAt=today; lockUntil=addMonths(today,12);}
+      pendingAdult=""; delete $("scan").dataset.scanned; $("join-consent").checked=false;
+      $("join-error").hidden=true; render(); toast(`${candidates[id].name} joined. ${circleSize()} of 6 places used.`);
+    }
+    $("join").addEventListener("click",()=>{
+      if(circleSize()>=maxMembers) {toast("Circle full. Maximum 6 members including the admin."); return;}
+      if(!$("scan").dataset.scanned) {toast("Scan the member's QR first."); return;}
+      if(!$("join-consent").checked) {$("join-error").textContent="Both members must accept the one-year commitment before joining."; $("join-error").hidden=false; return;}
+      const id=$("joining-member").value;
+      if(isMinor(id)) addFamilyMember(id);
+      else {pendingAdult=id; delete $("scan").dataset.scanned; $("join-consent").checked=false; render();}
+    });
+    $("adult-accept").addEventListener("click",()=>{if(pendingAdult) addFamilyMember(pendingAdult);});
+    $("leave").addEventListener("click",()=>{
+      if(!joinedAt || today<lockUntil) {toast("The one-year lock is still active."); return;}
+      familyMembers=familyMembers.filter(member=>member.id!=="chloe");
+      joinedAt=null; lockUntil=null; code=""; codeExpires=0; $("code-form").hidden=true; delete $("scan").dataset.scanned;
+      $("join-consent").checked=false; render(); toast("You left the circle. Contributed miles remain in the family pool.");
+    });
+    $("contribute").addEventListener("click",()=>{
+      if(familyMembers.some(member=>member.id==="chloe" && member.minor)) {toast("Minor miles can transfer only to the guardian/admin, not directly into the shared pool."); return;}
+      if(!joinedAt || balance<2000 || pool>98000) {toast("Join the family and check your available miles first."); return;}
+      balance-=2000; pool+=2000; render(); toast("2,000 Asia Miles contributed to the family pool.");
+    });
+    $("request").addEventListener("click",()=>{
+      if(!joinedAt || redeemed || pool<10000) return;
+      code=String(100000+crypto.getRandomValues(new Uint32Array(1))[0]%900000); codeExpires=Date.now()+60000;
+      $("sample-code").textContent=`Verification code: ${code}. Expires in 60 seconds.`;
+      $("code-form").hidden=false; $("otp-error").hidden=true; $("otp").value=""; $("otp").focus();
+    });
+    $("redeem").addEventListener("click",()=>{
+      const error=!joinedAt?"Join the family first.":redeemed?"This reward was already redeemed.":!code || Date.now()>=codeExpires?"Request a new code; the previous code is missing or expired.":$("otp").value.trim()!==code?"Incorrect code. Enter the six-digit verification code.":pool<10000?"Insufficient pooled miles.":"";
+      $("otp-error").textContent=error; $("otp-error").hidden=!error; if(error) return;
+      pool-=10000; redeemed=true; code=""; codeExpires=0; $("code-form").hidden=true;
+      $("award").textContent=`Reward redeemed. 10,000 miles deducted. Family alerts: Mei Trin, ${familyMembers.map(member=>candidates[member.id].name).join(", ")}.`;
+      render(); toast(`Reward redeemed. All ${circleSize()} members notified.`);
+    });
+    $("lounge").addEventListener("click",()=>{
+      if(!graduationConfirmed || today<graduationStart || today>=graduationEnd || loungeUsed) return;
+      loungeUsed=true; render(); toast("Lounge pass marked as used.");
+    });
+    $("confirm-graduation").addEventListener("click",()=>{
+      if(!verified || graduationConfirmed) return;
+      if(!$("graduation-consent").checked) {$("graduation-error").hidden=false; return;}
+      graduationConfirmed=true; graduationStart=today; graduationEnd=addMonths(today,6);
+      graduationLast=iso(new Date(date(graduationEnd).getTime()-86400000));
+      $("graduation-error").hidden=true; render(); toast("Your six-month graduation celebration starts today.");
+    });
+    document.addEventListener("click",event=>{
+      const button=event.target.closest("[data-trip]"); if(!button) return;
+      if(!familyMembers.some(member=>member.id==="chloe") || !familyMembers.some(member=>member.id==="dad")) {toast("Mum, Percy and Daniel must be in the same circle for these journeys to qualify."); return;}
+      if(completedTrips.has(button.dataset.trip)) {toast("This journey is already recorded."); return;}
+      completedTrips.add(button.dataset.trip); render(); toast("Qualifying family journey recorded.");
+    });
+    $("family-lounge").addEventListener("click",()=>{
+      if(completedTrips.size<3 || familyPassUsed) return;
+      familyPassUsed=true; render(); toast("Family lounge pass marked as used.");
+    });
+    $("guardian-transfer").addEventListener("click",()=>{
+      if($("device").value!=="admin" || !familyMembers.some(member=>member.id==="sam") || childMiles===0) return;
+      const transferred=childMiles; guardianMiles+=transferred; childMiles=0;
+      $("guardian-history").textContent=`${pretty(today)} · ${format(transferred)} Asia Miles transferred from Sam to guardian Mei.`;
+      $("guardian-history").hidden=false; render(); toast("Child-to-guardian transfer complete.");
+    });
+    $("demo-date").addEventListener("change",()=>{today=$("demo-date").value; render();});
+    $("support").addEventListener("click",()=>$("support-copy").hidden=false);
+    $("reset").addEventListener("click",reset);
+    $("qr").innerHTML="<i></i>".repeat(81);
+    reset();
+  </script>
+</body>
+</html>
